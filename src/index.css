@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme {
+  /* Masar brand: deep navy for trust + teal for progress and workflow. */
+  --color-blue-50: #eef8f6;
+  --color-blue-100: #d8efeb;
+  --color-blue-200: #b5dfd8;
+  --color-blue-300: #83c8be;
+  --color-blue-400: #4fa99d;
+  --color-blue-500: #258b80;
+  --color-blue-600: #18766c;
+  --color-blue-700: #0f625b;
+  --color-blue-800: #123b5d;
+  --color-blue-900: #0b2d46;
+  --color-slate-50: #f4f7f5;
+  --color-slate-100: #eaf0ed;
+  --color-slate-200: #dce5e0;
+  --color-slate-300: #c5d1ca;
+  --color-slate-400: #91a097;
+  --color-slate-500: #68786f;
+  --color-slate-600: #506158;
+  --color-slate-700: #3b4a42;
+  --color-slate-800: #29362f;
+  --color-slate-900: #18231e;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  font-family: "Cairo", "Segoe UI", Tahoma, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f4f7f5;
+  color: #18231e;
+  font-family: "Cairo", "Segoe UI", Tahoma, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: #b5dfd8;
+  color: #0b2d46;
+}
+
+
+/* Role-based visual identity: regular users follow the calm Masar teal path;
+   administrators use a high-contrast navy/amber control palette. */
+.masar-admin-theme {
+  --masar-accent: #d4af37;
+  --masar-accent-strong: #a67c00;
+  --masar-surface: #f6f3ea;
+  --masar-primary: #b58a18;
+  --masar-primary-strong: #8b6914;
+  --masar-focus: #e2c15a;
+}
+
+.masar-user-theme {
+  --masar-accent: #0f766e;
+  --masar-accent-strong: #115e59;
+  --masar-surface: #f4f7f5;
+}
+
+.masar-ceo-theme {
+  --masar-accent: #d4af37;
+  --masar-accent-strong: #8b6914;
+  --masar-surface: #f6f3ea;
+  --masar-primary: #8b6914;
+  --masar-primary-strong: #6f5310;
+  --masar-focus: #d4af37;
+}
+
+.masar-ceo-theme .bg-blue-700 { background-color: #8b6914; }
+.masar-ceo-theme .hover\:bg-blue-800:hover { background-color: #6f5310; }
+.masar-ceo-theme .bg-amber-400 { background-color: #d4af37; }
+.masar-ceo-theme .text-amber-300 { color: #e2c15a; }
+.masar-ceo-theme .text-amber-700 { color: #8b6914; }
+.masar-ceo-theme .hover\:bg-amber-50:hover { background-color: #fbf6e6; }
+.masar-ceo-theme .hover\:border-amber-300:hover { border-color: #d4af37; }
+.masar-ceo-theme .focus-visible\:ring-amber-400:focus-visible { --tw-ring-color: #d4af37; }
+
+.masar-admin-sidebar {
+  box-shadow: 8px 0 24px rgba(15, 23, 42, 0.08);
+}
+
+@media (max-width: 1023px) {
+  body { padding-bottom: 0; }
+}
+
+@media (max-width: 639px) {
+  h1 { line-height: 1.2; }
+  .overflow-x-auto { scrollbar-width: thin; }
+}
+
+.masar-admin-theme .bg-blue-700 { background-color: #d97706; }
+.masar-admin-theme .hover\:bg-blue-800:hover { background-color: #b45309; }
+.masar-user-theme .bg-blue-700 { background-color: #0f766e; }
+.masar-user-theme .hover\:bg-blue-800:hover { background-color: #115e59; }
+
+.masar-user-theme { --masar-primary: #0f766e; --masar-primary-strong: #115e59; --masar-focus: #14b8a6; }
+
+@media (max-width: 639px) {
+  .masar-page-title { font-size: 1.5rem; line-height: 1.25; }
+}
