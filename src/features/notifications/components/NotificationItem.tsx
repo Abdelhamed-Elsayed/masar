@@ -40,12 +40,12 @@ export function NotificationItem({
   return (
     <Item
       role={asListItem ? undefined : 'listitem'}
-      className="flex items-start gap-3 border-b border-slate-100 py-3 last:border-b-0"
+      className="flex items-start gap-3 border-b border-slate-100 py-3 last:border-b-0 dark:border-slate-800"
     >
       <span className="mt-1 flex size-5 shrink-0 items-center justify-center">
         <Circle
           size={8}
-          className={notification.isRead ? 'fill-slate-300 text-slate-300' : 'fill-blue-600 text-blue-600'}
+          className={notification.isRead ? 'fill-slate-300 text-slate-300 dark:fill-slate-600 dark:text-slate-600' : 'fill-blue-600 text-blue-600 dark:fill-blue-400 dark:text-blue-400'}
           aria-hidden="true"
         />
       </span>
@@ -54,20 +54,20 @@ export function NotificationItem({
         onClick={() => onRead(notification.id)}
         className="min-w-0 flex-1 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
       >
-        <span className="flex items-center gap-2">
-          <span className="truncate text-sm font-semibold text-slate-900">
+        <span className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+          <span className={`break-words text-sm font-semibold text-slate-900 dark:text-slate-100 ${compact ? 'line-clamp-2' : ''}`}>
             {content(notification.title)}
           </span>
           {!compact ? (
-            <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600">
+            <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
               {typeLabelKey ? t(typeLabelKey) : t('notifications.label')}
             </span>
           ) : null}
         </span>
-        <span className={`mt-1 block text-sm text-slate-600 ${compact ? 'line-clamp-2' : ''}`}>
+        <span className={`mt-1 block text-sm text-slate-600 break-words dark:text-slate-300 ${compact ? 'line-clamp-2' : ''}`}>
           {content(notification.body)}
         </span>
-        <time dateTime={notification.createdAt} className="mt-1 block text-xs text-slate-400">
+        <time dateTime={notification.createdAt} className="mt-1 block text-xs text-slate-400 dark:text-slate-500">
           {new Intl.DateTimeFormat(locale === 'ar' ? 'ar-EG' : 'en-US', {
             dateStyle: 'medium',
             timeStyle: 'short',
@@ -81,7 +81,7 @@ export function NotificationItem({
           size="sm"
           onClick={() => onRead(notification.id)}
           aria-label={`${t('notifications.markRead')}: ${content(notification.title)}`}
-          className="shrink-0"
+          className="shrink-0 p-2 min-h-8 min-w-8 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
         >
           <Check size={15} aria-hidden="true" />
           <span className="hidden sm:inline">{t('notifications.markRead')}</span>

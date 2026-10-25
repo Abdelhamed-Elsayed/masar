@@ -44,15 +44,21 @@ export function NotificationsPage() {
             onClick={() => {
               if (currentUser) markAllAsRead(currentUser.id)
             }}
+            className="w-full sm:w-auto"
           >
             {t('notifications.markAllRead')}
           </Button>
         }
       />
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-2 text-sm text-slate-600">
-          <span className="font-medium">{t('notifications.filter')}</span>
-          <Select aria-label={t('notifications.filterLabel')} value={filter} onChange={(event) => setFilter(event.currentTarget.value as 'all' | 'unread')} className="w-40">
+        <div className="flex w-full items-center justify-between gap-2 text-sm text-slate-600 dark:text-slate-400 sm:w-auto sm:justify-start">
+          <span className="font-medium shrink-0">{t('notifications.filter')}</span>
+          <Select
+            aria-label={t('notifications.filterLabel')}
+            value={filter}
+            onChange={(event) => setFilter(event.currentTarget.value as 'all' | 'unread')}
+            className="w-36 sm:w-40"
+          >
             <option value="all">{t('notifications.all')}</option>
             <option value="unread">{t('notifications.unreadOnly')}</option>
           </Select>
@@ -60,7 +66,7 @@ export function NotificationsPage() {
       </div>
       <section
         aria-label={t('notifications.yours')}
-        className="rounded-xl border border-slate-200 bg-white px-4 sm:px-6"
+        className="rounded-xl border border-slate-200 bg-white px-3 sm:px-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
       >
         <NotificationList
           notifications={userNotifications}
