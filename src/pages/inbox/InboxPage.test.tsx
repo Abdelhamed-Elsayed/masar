@@ -11,8 +11,8 @@ import { InboxPage } from './InboxPage'
 
 describe('InboxPage', () => {
   beforeEach(() => {
-    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.daniel)!, isInitializing: false })
-    useRequestStore.setState({ requests: mockRequests, hydratedUserId: userIds.daniel })
+    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.abdelrahmanMohamed)!, isInitializing: false })
+    useRequestStore.setState({ requests: mockRequests, hydratedUserId: userIds.abdelrahmanMohamed })
     useWorkflowStore.setState({ instances: mockWorkflowInstances })
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,

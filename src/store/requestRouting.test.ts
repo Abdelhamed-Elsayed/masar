@@ -25,14 +25,14 @@ describe('request workflow routing', () => {
       roles: mockRoles,
       departments: mockDepartments,
       requestTypes: mockRequestTypes,
-      companyOwnerId: userIds.james,
+      companyOwnerId: userIds.abdelhamid,
     }))
     useWorkflowStore.setState((state) => ({
       ...state,
       instances: [],
     }))
     useRequestStore.setState({ requests: [], hydratedUserId: null })
-    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.adam)!, isInitializing: false })
+    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.ahmedAyman)!, isInitializing: false })
   })
 
   it('routes a leave request to its assigned approvers in sequence until fully approved', async () => {
@@ -48,7 +48,7 @@ describe('request workflow routing', () => {
     expect(await useRequestStore.getState().submitRequest(request!.id)).toBe(true)
     expect(useRequestStore.getState().getRequestById(request!.id)?.status).toBe(RequestStatus.IN_PROGRESS)
 
-    const expectedApproverIds = [userIds.mahmoudAyman, userIds.maya, userIds.abdelrahmanMohamed, userIds.abdelhamid]
+    const expectedApproverIds = [userIds.mahmoudAyman, userIds.mostafaKamel, userIds.abdelrahmanMohamed, userIds.abdelhamid]
     for (const [index, approverId] of expectedApproverIds.entries()) {
       const instance = useWorkflowStore.getState().getInstanceByRequestId(request!.id)!
       const currentStep = instance.steps.find((step) => step.status === WorkflowStepStatus.CURRENT)
@@ -89,7 +89,7 @@ describe('request workflow routing', () => {
 
     const rejectedNotifications = notifications.filter((notification) => notification.type === NotificationType.REQUEST_REJECTED)
     expect(rejectedNotifications.map((notification) => notification.userId)).toEqual([
-      userIds.maya,
+      userIds.mostafaKamel,
       userIds.abdelrahmanMohamed,
       userIds.abdelhamid,
     ])

@@ -9,8 +9,8 @@ import { OutboxPage } from './OutboxPage'
 
 describe('OutboxPage', () => {
   beforeEach(() => {
-    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.adam)!, isInitializing: false })
-    useRequestStore.setState({ requests: mockRequests, hydratedUserId: userIds.adam })
+    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.ahmedAyman)!, isInitializing: false })
+    useRequestStore.setState({ requests: mockRequests, hydratedUserId: userIds.ahmedAyman })
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       value: (query: string) => ({

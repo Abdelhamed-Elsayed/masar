@@ -30,9 +30,9 @@ describe('RegistrationApprovalsPage queues', () => {
       ...state,
       users: [...mockUsers, hrDepartmentApplicant],
       departments: mockDepartments,
-      companyOwnerId: userIds.james,
+      companyOwnerId: userIds.abdelhamid,
     }))
-    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.olivia)!, isInitializing: false })
+    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.abdelrahmanGhoneim)!, isInitializing: false })
   })
 
   it('shows an HR director the department-head queue for her department as well as HR duties', () => {

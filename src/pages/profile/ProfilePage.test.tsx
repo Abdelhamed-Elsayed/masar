@@ -8,9 +8,9 @@ import { ProfilePage } from './ProfilePage'
 
 describe('ProfilePage public profile consent', () => {
   beforeEach(() => {
-    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.adam)!, isInitializing: false })
+    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.ahmedAyman)!, isInitializing: false })
     useDirectoryStore.setState({
-      users: mockUsers.map((user) => user.id === userIds.adam ? { ...user, publicProfileVisible: false } : user),
+      users: mockUsers.map((user) => user.id === userIds.ahmedAyman ? { ...user, publicProfileVisible: false } : user),
     })
     useLocaleStore.setState({ locale: 'en' })
   })
@@ -23,11 +23,11 @@ describe('ProfilePage public profile consent', () => {
 
     expect(consent).not.toBeChecked()
     fireEvent.click(consent)
-    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.adam)?.publicProfileVisible).toBe(true)
+    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.ahmedAyman)?.publicProfileVisible).toBe(true)
     expect(consent).toBeChecked()
 
     fireEvent.click(consent)
-    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.adam)?.publicProfileVisible).toBe(false)
+    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.ahmedAyman)?.publicProfileVisible).toBe(false)
     expect(consent).not.toBeChecked()
   })
 })

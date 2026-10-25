@@ -122,7 +122,7 @@ export const useDirectoryStore = create<DirectoryState>()(
       roles: mockRoles,
       requestTypes: mockRequestTypes,
       rolePermissions: DEFAULT_ROLE_PERMISSIONS,
-      companyOwnerId: userIds.james,
+      companyOwnerId: userIds.abdelhamid,
       setPublicProfileVisibility: (userId, actorId, visible) => {
         const user = get().users.find((item) => item.id === userId)
         if (!user || actorId !== userId || !user.isActive) return false

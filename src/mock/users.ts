@@ -73,13 +73,6 @@ export const userIds = {
   abdelhamid: 'user-abdelhamid',
   mohamedAbdelfattah: 'user-mohamed-abdelfattah',
   mahmoudAyman: 'user-mahmoud-ayman',
-  adam: 'user-ahmed-ayman',
-  sarah: 'user-ahmed-mohamed',
-  daniel: 'user-abdelrahman-mohamed',
-  maya: 'user-mostafa-kamel',
-  olivia: 'user-abdelrahman-ghoneim',
-  james: 'user-abdelhamid',
-  emma: 'user-mohamed-abdelfattah',
 } as const
 
 const seedUsers: User[] = [
@@ -244,7 +237,7 @@ const seedUsers: User[] = [
     email: 'mostafa.kamel@masar.local',
     jobTitle: 'HR Specialist',
     departmentId: 'dept-hr',
-    managerId: userIds.olivia,
+    managerId: userIds.abdelrahmanGhoneim,
     roleIds: [roleIds.employee, roleIds.hr, roleIds.approver],
     isActive: true,
     avatarUrl: '/avatars/mostafa-kamel.svg',

@@ -9,8 +9,8 @@ import { RequestsPage } from './RequestsPage'
 
 describe('RequestsPage approved requests section', () => {
   beforeEach(() => {
-    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.emma)!, isInitializing: false })
-    useRequestStore.setState({ requests: mockRequests, hydratedUserId: userIds.emma })
+    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.mohamedAbdelfattah)!, isInitializing: false })
+    useRequestStore.setState({ requests: mockRequests, hydratedUserId: userIds.mohamedAbdelfattah })
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       value: (query: string) => ({

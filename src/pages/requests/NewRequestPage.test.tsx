@@ -34,7 +34,7 @@ describe('NewRequestPage validation', () => {
       workflowDefinitionId: 'workflow-test',
       formDefinitionId: checkboxForm.id,
     }
-    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.adam)! })
+    useAuthStore.setState({ currentUser: mockUsers.find((user) => user.id === userIds.ahmedAyman)! })
     useDirectoryStore.setState((state) => ({ ...state, requestTypes: [requestType] }))
     useFormStore.setState({ forms: [checkboxForm] })
     useRequestStore.setState({

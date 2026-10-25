@@ -27,14 +27,14 @@ export const mockDepartments: Department[] = [
     id: departmentIds.hr,
     name: 'Human Resources',
     code: 'HR',
-    headUserId: userIds.olivia,
+    headUserId: userIds.abdelrahmanGhoneim,
     parentDepartmentId: departmentIds.executive,
   },
   {
     id: departmentIds.executive,
     name: 'Executive Office',
     code: 'EXE',
-    headUserId: userIds.james,
+    headUserId: userIds.abdelhamid,
     parentDepartmentId: null,
   },
 ]

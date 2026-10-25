@@ -11,7 +11,7 @@ describe('CEO department management', () => {
     useDirectoryStore.setState({
       users: mockUsers,
       departments: mockDepartments,
-      companyOwnerId: userIds.james,
+      companyOwnerId: userIds.abdelhamid,
     })
   })
 
@@ -23,14 +23,14 @@ describe('CEO department management', () => {
     await user.type(screen.getByLabelText(/Name/), 'Customer Success')
     await user.type(screen.getByLabelText(/Code/), 'CS')
     fireEvent.change(screen.getByLabelText(/Department head/), {
-      target: { value: userIds.adam },
+      target: { value: userIds.ahmedAyman },
     })
     await user.click(screen.getByRole('button', { name: 'Create department' }))
 
     await waitFor(() => {
       const department = useDirectoryStore.getState().departments.find((item) => item.code === 'CS')
-      const assignedUser = useDirectoryStore.getState().users.find((item) => item.id === userIds.adam)
-      expect(department?.headUserId).toBe(userIds.adam)
+      const assignedUser = useDirectoryStore.getState().users.find((item) => item.id === userIds.ahmedAyman)
+      expect(department?.headUserId).toBe(userIds.ahmedAyman)
       expect(assignedUser?.departmentId).toBe(department?.id)
       expect(assignedUser?.roleIds).toContain(roleIds.departmentHead)
     })

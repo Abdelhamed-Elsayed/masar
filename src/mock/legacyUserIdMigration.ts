@@ -20,6 +20,13 @@ export const legacyUserIdMap: Record<string, string> = {
   'user-noura-ibrahim': userIds.abdelrahmanGhoneim,
   'user-karim-saleh': userIds.abdelhamid,
   'user-fatima-nasser': userIds.mohamedAbdelfattah,
+  'user-abdelhamid-elsayed': userIds.abdelhamid,
+  'user-ahmed-ayman': userIds.ahmedAyman,
+  'user-ahmed-mohamed': userIds.ahmedMohamed,
+  'user-abdelrahman-mohamed': userIds.abdelrahmanMohamed,
+  'user-mostafa-kamel': userIds.mostafaKamel,
+  'user-abdelrahman-ghoneim': userIds.abdelrahmanGhoneim,
+  'user-mohamed-abdelfattah': userIds.mohamedAbdelfattah,
 }
 
 export function normalizeLegacyUserId(userId: string | null | undefined): string | null | undefined {

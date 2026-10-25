@@ -9,13 +9,13 @@ describe('registration rejection flow', () => {
   beforeEach(() => {
     useDirectoryStore.setState((state) => ({
       ...state,
-      users: state.users.map((user) => user.id === userIds.adam ? { ...user, isActive: false, approvalStatus: 'REJECTED', registrationStage: 'REJECTED', registrationDecisionNote: 'Documents could not be verified.' } : user),
+      users: state.users.map((user) => user.id === userIds.ahmedAyman ? { ...user, isActive: false, approvalStatus: 'REJECTED', registrationStage: 'REJECTED', registrationDecisionNote: 'Documents could not be verified.' } : user),
     }))
     useAuthStore.setState({ currentUser: null, roles: [], isInitializing: false })
   })
 
   it('keeps rejected registrations inactive', () => {
-    const user = useDirectoryStore.getState().users.find((item) => item.id === userIds.adam)!
+    const user = useDirectoryStore.getState().users.find((item) => item.id === userIds.ahmedAyman)!
     expect(user.isActive).toBe(false)
     expect(user.approvalStatus).toBe('REJECTED')
     expect(user.registrationStage).toBe('REJECTED')
@@ -23,14 +23,14 @@ describe('registration rejection flow', () => {
   })
 
   it('blocks login for a rejected account and keeps the rejection reason available', async () => {
-    const user = useDirectoryStore.getState().users.find((item) => item.id === userIds.adam)!
+    const user = useDirectoryStore.getState().users.find((item) => item.id === userIds.ahmedAyman)!
     const result = await useAuthStore.getState().login(user.email, 'Masar@1021')
     expect(result).toBe('REGISTRATION_REJECTED')
     expect(useAuthStore.getState().currentUser).toBeNull()
   })
 
   it('does not treat a rejected account as an active session', () => {
-    const user = useDirectoryStore.getState().users.find((item) => item.id === userIds.adam)!
+    const user = useDirectoryStore.getState().users.find((item) => item.id === userIds.ahmedAyman)!
     expect(user.roleIds).toContain(roleIds.employee)
     expect(user.isActive).toBe(false)
   })
@@ -49,12 +49,12 @@ describe('registration rejection flow', () => {
     ])
     expect(new Set(passwords).size).toBe(passwords.length)
 
-    const user = useDirectoryStore.getState().users.find((item) => item.id === userIds.sarah)!
+    const user = useDirectoryStore.getState().users.find((item) => item.id === userIds.ahmedMohamed)!
     expect(await useAuthStore.getState().login(user.email, demoCredentials[user.id])).toBeNull()
   })
 
   it('keeps a new account pending through HR and department review, then enables login after CEO approval', async () => {
-    useDirectoryStore.setState((state) => ({ ...state, users: mockUsers, departments: mockDepartments, companyOwnerId: userIds.james }))
+    useDirectoryStore.setState((state) => ({ ...state, users: mockUsers, departments: mockDepartments, companyOwnerId: userIds.abdelhamid }))
     const applicant: User = {
       id: 'user-registration-lifecycle-test',
       employeeId: 'PENDING-TEST',
@@ -74,17 +74,17 @@ describe('registration rejection flow', () => {
 
     expect(await useAuthStore.getState().registerPendingUser(applicant, 'StrongPass1')).toBe(true)
     expect(await useAuthStore.getState().login(applicant.email, 'StrongPass1')).toBe('PENDING_APPROVAL')
-    expect(useDirectoryStore.getState().approveRegistrationByHr(applicant.id, userIds.maya)).toBe(true)
+    expect(useDirectoryStore.getState().approveRegistrationByHr(applicant.id, userIds.mostafaKamel)).toBe(true)
     expect(useDirectoryStore.getState().users.find((user) => user.id === applicant.id)?.registrationStage).toBe('DEPARTMENT_HEAD_REVIEW')
     expect(await useAuthStore.getState().login(applicant.email, 'StrongPass1')).toBe('PENDING_APPROVAL')
-    expect(useDirectoryStore.getState().approveRegistrationByDepartmentHead(applicant.id, userIds.daniel)).toBe(true)
+    expect(useDirectoryStore.getState().approveRegistrationByDepartmentHead(applicant.id, userIds.abdelrahmanMohamed)).toBe(true)
     expect(useDirectoryStore.getState().users.find((user) => user.id === applicant.id)?.registrationStage).toBe('CEO_REVIEW')
     expect(await useAuthStore.getState().login(applicant.email, 'StrongPass1')).toBe('PENDING_APPROVAL')
 
-    expect(useDirectoryStore.getState().finalizeRegistrationByCeo(applicant.id, userIds.james, {
+    expect(useDirectoryStore.getState().finalizeRegistrationByCeo(applicant.id, userIds.abdelhamid, {
       jobTitle: 'Senior Analyst',
       departmentId: 'dept-engineering',
-      managerId: userIds.sarah,
+      managerId: userIds.ahmedMohamed,
       roleIds: [roleIds.employee],
     })).toBe(true)
 

@@ -7,15 +7,15 @@ describe('directory hierarchy protections', () => {
   beforeEach(() => {
     useDirectoryStore.setState({
       users: mockUsers,
-      companyOwnerId: userIds.james,
+      companyOwnerId: userIds.abdelhamid,
       rolePermissions: DEFAULT_ROLE_PERMISSIONS,
     })
   })
 
   it('rejects a manager cycle', () => {
-    const before = useDirectoryStore.getState().users.find((user) => user.id === userIds.adam)?.managerId
-    useDirectoryStore.getState().upsertUser({ ...mockUsers[0], managerId: userIds.adam })
-    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.adam)?.managerId).toBe(before)
+    const before = useDirectoryStore.getState().users.find((user) => user.id === userIds.ahmedAyman)?.managerId
+    useDirectoryStore.getState().upsertUser({ ...mockUsers[0], managerId: userIds.ahmedAyman })
+    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.ahmedAyman)?.managerId).toBe(before)
   })
 
   it('seeds Arabic identities with aligned engineering and development department heads', () => {
@@ -43,17 +43,17 @@ describe('directory hierarchy protections', () => {
     const { setPublicProfileVisibility } = useDirectoryStore.getState()
     useDirectoryStore.setState((state) => ({
       ...state,
-      users: state.users.map((user) => user.id === userIds.adam ? { ...user, publicProfileVisible: undefined } : user),
+      users: state.users.map((user) => user.id === userIds.ahmedAyman ? { ...user, publicProfileVisible: undefined } : user),
     }))
 
-    expect(setPublicProfileVisibility(userIds.adam, userIds.sarah, true)).toBe(false)
-    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.adam)?.publicProfileVisible).toBeUndefined()
+    expect(setPublicProfileVisibility(userIds.ahmedAyman, userIds.ahmedMohamed, true)).toBe(false)
+    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.ahmedAyman)?.publicProfileVisible).toBeUndefined()
 
-    expect(setPublicProfileVisibility(userIds.adam, userIds.adam, true)).toBe(true)
-    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.adam)?.publicProfileVisible).toBe(true)
+    expect(setPublicProfileVisibility(userIds.ahmedAyman, userIds.ahmedAyman, true)).toBe(true)
+    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.ahmedAyman)?.publicProfileVisible).toBe(true)
 
-    expect(setPublicProfileVisibility(userIds.adam, userIds.adam, false)).toBe(true)
-    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.adam)?.publicProfileVisible).toBe(false)
+    expect(setPublicProfileVisibility(userIds.ahmedAyman, userIds.ahmedAyman, false)).toBe(true)
+    expect(useDirectoryStore.getState().users.find((user) => user.id === userIds.ahmedAyman)?.publicProfileVisible).toBe(false)
   })
 
   it('preserves employee public-profile consent when an administrator edits their account', () => {
@@ -69,9 +69,9 @@ describe('directory hierarchy protections', () => {
   })
 
   it('protects the company owner from deactivation or CEO removal', () => {
-    const owner = useDirectoryStore.getState().users.find((user) => user.id === userIds.james)!
+    const owner = useDirectoryStore.getState().users.find((user) => user.id === userIds.abdelhamid)!
     useDirectoryStore.getState().upsertUser({ ...owner, isActive: false, roleIds: owner.roleIds.filter((id) => id !== roleIds.ceo) })
-    const saved = useDirectoryStore.getState().users.find((user) => user.id === userIds.james)!
+    const saved = useDirectoryStore.getState().users.find((user) => user.id === userIds.abdelhamid)!
     expect(saved.isActive).toBe(true)
     expect(saved.roleIds).toContain(roleIds.ceo)
   })
@@ -79,16 +79,16 @@ describe('directory hierarchy protections', () => {
   it('preserves CEO management access when saved role permissions are missing', () => {
     useDirectoryStore.setState({
       users: mockUsers,
-      companyOwnerId: userIds.james,
+      companyOwnerId: userIds.abdelhamid,
       rolePermissions: { [roleIds.ceo]: [] },
     })
     const { hasPermission } = useDirectoryStore.getState()
 
-    expect(hasPermission(userIds.james, 'company.manage')).toBe(true)
-    expect(hasPermission(userIds.james, 'users.manage')).toBe(true)
-    expect(hasPermission(userIds.james, 'departments.manage')).toBe(true)
-    expect(hasPermission(userIds.james, 'roles.manage')).toBe(true)
-    expect(hasPermission(userIds.adam, 'departments.manage')).toBe(false)
+    expect(hasPermission(userIds.abdelhamid, 'company.manage')).toBe(true)
+    expect(hasPermission(userIds.abdelhamid, 'users.manage')).toBe(true)
+    expect(hasPermission(userIds.abdelhamid, 'departments.manage')).toBe(true)
+    expect(hasPermission(userIds.abdelhamid, 'roles.manage')).toBe(true)
+    expect(hasPermission(userIds.ahmedAyman, 'departments.manage')).toBe(false)
     useDirectoryStore.setState({ rolePermissions: DEFAULT_ROLE_PERMISSIONS })
   })
 })
@@ -97,13 +97,13 @@ describe('persisted data from older builds', () => {
   it('restores the current name and avatar of seeded users', () => {
     const migrate = useDirectoryStore.persist.getOptions().migrate!
     const stale = {
-      users: mockUsers.map((user) => user.id === userIds.james
-        ? { ...user, fullName: 'عبدالحميد', firstName: 'عبدالحميد', avatarUrl: '/avatars/abdelhamid-ibrahim.svg' }
+      users: mockUsers.map((user) => user.id === userIds.abdelhamid
+        ? { ...user, fullName: 'عبدالحميد', firstName: 'عبدالحميد', avatarUrl: '/avatars/abdelhamid-elsayed.svg' }
         : user),
     }
     const migrated = migrate(stale, 8) as { users: typeof mockUsers }
-    const ceo = migrated.users.find((user) => user.id === userIds.james)!
-    const seeded = mockUsers.find((user) => user.id === userIds.james)!
+    const ceo = migrated.users.find((user) => user.id === userIds.abdelhamid)!
+    const seeded = mockUsers.find((user) => user.id === userIds.abdelhamid)!
     expect(ceo.fullName).toBe(seeded.fullName)
     expect(ceo.avatarUrl).toBe(seeded.avatarUrl)
     expect(ceo.avatarUrl).toBe('/avatars/abdelhamid-elsayed.svg')
